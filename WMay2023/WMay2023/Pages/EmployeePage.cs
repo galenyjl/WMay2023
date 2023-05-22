@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,14 +47,18 @@ namespace WMay2023.Pages
             // Check if record created is present in the table and has expected value
             IWebElement actualUsername = driver.FindElement(By.XPath("//*[@id=\"root\"]/div/div[2]/div/div[2]/div/div/div[2]/div[2]/div/div/div/table/tbody/tr[last()]/td[1]/div/div[3]"));
 
-            if (actualUsername.Text == "Username: TestUser")
-            {
-                Console.WriteLine("Employee created successfully, test passed");
-            }
-            else
-            {
-                Console.WriteLine("Test failed");
-            }
+            // option 1
+            Assert.That(actualUsername.Text == "Username: TestUser", "Actual username and expected username do not match");
+
+            // option 2
+            //if (actualUsername.Text == "Username: TestUser")
+            //{
+            //    Console.WriteLine("Employee created successfully, test passed");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("Test failed");
+            //}
         }
 
         public void EditEmployee(IWebDriver driver)
