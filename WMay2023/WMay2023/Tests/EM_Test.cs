@@ -21,7 +21,7 @@ namespace WMay2023.Tests
             loginPageObject.LoginSteps(driver);
         }
 
-        [Test]
+        [Test, Order(1)]
         public void CreateEmployee_Test()
         {
             // Home page object initialization and definition
@@ -33,7 +33,7 @@ namespace WMay2023.Tests
             employeePageObject.CreateEmployee(driver);
         }
 
-        [Test]
+        [Test, Order(2)]
         public void EditEmployee_Test()
         {
             // Home page object initialization and definition
@@ -45,7 +45,7 @@ namespace WMay2023.Tests
             employeePageObject.EditEmployee(driver);
         }
 
-        [Test]
+        [Test, Order(3)]
         public void DeleteEmployee_Test()
         {
             // Home page object initialization and definition
@@ -60,7 +60,7 @@ namespace WMay2023.Tests
         [TearDown]
         public void CloseTestRun()
         {
-
+            driver.Close();
         }
     }
 }
