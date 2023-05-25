@@ -20,5 +20,10 @@ namespace WMay2023.Pages
             employeeManagementMenu.Click();
             Thread.Sleep(2000);
         }
+
+        public void GoToNotificationPage(IWebDriver driver)
+        {
+
+        }
     }
 }
