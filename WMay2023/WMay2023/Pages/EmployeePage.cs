@@ -39,25 +39,25 @@ namespace WMay2023.Pages
             js.ExecuteScript("window.scrollTo(0, document.body.scrollHeight)");
             Thread.Sleep(1000);
 
-            // Check if record created is present in the table and has expected value
+
+        }
+
+        public string GetFirstName(IWebDriver driver)
+        {
             IWebElement actualFirstName = driver.FindElement(By.XPath("//*[@id=\"root\"]/div/div[2]/div/div[2]/div/div/div[2]/div[2]/div/div/div/table/tbody/tr[last()]/td[1]/div/div[1]"));
+            return actualFirstName.Text;
+        }
+
+        public string GetLastName(IWebDriver driver)
+        {
             IWebElement actualLastName = driver.FindElement(By.XPath("//*[@id=\"root\"]/div/div[2]/div/div[2]/div/div/div[2]/div[2]/div/div/div/table/tbody/tr[last()]/td[1]/div/div[2]"));
+            return actualLastName.Text;
+        }
+
+        public string GetUsername(IWebDriver driver)
+        {
             IWebElement actualUsername = driver.FindElement(By.XPath("//*[@id=\"root\"]/div/div[2]/div/div[2]/div/div/div[2]/div[2]/div/div/div/table/tbody/tr[last()]/td[1]/div/div[3]"));
-
-            // option 1
-            Assert.That(actualFirstName.Text == "First Name: Test", "Actual first name and expected first name do not match");
-            Assert.That(actualLastName.Text == "Last Name: User", "Actual last name and expected last name do not match");
-            Assert.That(actualUsername.Text == "Username: TestUser", "Actual username and expected username do not match");
-
-            // option 2
-            //if (actualUsername.Text == "Username: TestUser")
-            //{
-            //    Console.WriteLine("Employee created successfully, test passed");
-            //}
-            //else
-            //{
-            //    Console.WriteLine("Test failed");
-            //}
+            return actualUsername.Text;
         }
 
         public void EditEmployee(IWebDriver driver)
