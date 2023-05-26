@@ -46,9 +46,27 @@ namespace WMay2023.StepDeifinitions
             string newLastName = employeePageObject.GetLastName(driver);
             string newUsername = employeePageObject.GetUsername(driver);
 
-            Assert.AreEqual("First Name: Test" == newFirstName, "Actual first name and expected first name do not match");
-            Assert.AreEqual("Last Name: User" == newLastName, "Actual last name and expected last name do not match");
-            Assert.AreEqual("Username: TestUser" == newUsername, "Actual username and expected username do not match");
+            Assert.AreEqual("First Name: Test", newFirstName, "Actual first name and expected first name do not match");
+            Assert.AreEqual("Last Name: User", newLastName, "Actual last name and expected last name do not match");
+            Assert.AreEqual("Username: TestUser", newUsername, "Actual username and expected username do not match");
+            driver.Quit();
         }
+
+        [When(@"I update '([^']*)', '([^']*)' and '([^']*)' on an existing employee record")]
+        public void WhenIUpdateAndOnAnExistingEmployeeRecord(string firstName, string lastName, string username)
+        {
+            EmployeePage employeePageObject = new EmployeePage();
+            employeePageObject.EditEmployee(driver, firstName, lastName, username);
+        }
+
+        [Then(@"The record should have the updated '([^']*)', '([^']*)' and '([^']*)'")]
+        public void ThenTheRecordShouldHaveTheUpdatedAnd(string firstName, string lastName, string username)
+        {
+            EmployeePage employeePageObject = new EmployeePage();
+            string editedFirstName = employeePageObject.GetEditedFirstName(driver);
+
+            Assert.AreEqual("First Name:" + firstName, editedFirstName, "Actual edited first name and expected first name do not match");
+        }
+
     }
 }

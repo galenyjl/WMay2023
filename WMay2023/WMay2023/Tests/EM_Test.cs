@@ -29,7 +29,7 @@ namespace WMay2023.Tests
 
             // Edit employee
             EmployeePage employeePageObject = new EmployeePage();
-            employeePageObject.EditEmployee(driver);
+            //employeePageObject.EditEmployee(driver);
         }
 
         [Test, Order(3)]

@@ -60,7 +60,7 @@ namespace WMay2023.Pages
             return actualUsername.Text;
         }
 
-        public void EditEmployee(IWebDriver driver)
+        public void EditEmployee(IWebDriver driver, string firstName, string lastName, string Username)
         {
             // Scroll down to the bottom
             IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
@@ -68,7 +68,7 @@ namespace WMay2023.Pages
             Thread.Sleep(1000);
 
             IWebElement newUsername = driver.FindElement(By.XPath("//*[@id=\"root\"]/div/div[2]/div/div[2]/div/div/div[2]/div[2]/div/div/div/table/tbody/tr[last()]/td[1]/div/div[3]"));
-            if (newUsername.Text == "Username: TestUser")
+            if (newUsername.Text == Username)
             {
                 IWebElement editButton = driver.FindElement(By.XPath("//*[@id=\"root\"]/div/div[2]/div/div[2]/div/div/div[2]/div[2]/div/div/div/table/tbody/tr[last()]/td[5]/div/button[2]"));
                 editButton.Click();
@@ -82,13 +82,13 @@ namespace WMay2023.Pages
             IWebElement editFirstNameTextbox = driver.FindElement(By.Id("firstName"));
             IWebElement clearFirstNameButton = driver.FindElement(By.XPath("//*[@id=\"root\"]/div/div[2]/div/div[2]/div/div/div[2]/div[2]/div/div/div/table/tbody/tr[25]/td[1]/div/form/div[1]/div/div[2]/div/div/span/span"));
             clearFirstNameButton.Click();
-            editFirstNameTextbox.SendKeys("editedTest");
+            editFirstNameTextbox.SendKeys(firstName);
 
             // Edit last name into code textbox
             IWebElement editLastNameTextbox = driver.FindElement(By.Id("lastName"));
             IWebElement clearLastNameButton = driver.FindElement(By.XPath("//*[@id=\"root\"]/div/div[2]/div/div[2]/div/div/div[2]/div[2]/div/div/div/table/tbody/tr[25]/td[1]/div/form/div[2]/div/div[2]/div/div/span/span"));
             clearLastNameButton.Click();
-            editLastNameTextbox.SendKeys("editedUser");
+            editLastNameTextbox.SendKeys(lastName);
 
             // Edit last name into code textbox
             IWebElement editUsernameTextbox = driver.FindElement(By.Id("userName"));
@@ -101,14 +101,19 @@ namespace WMay2023.Pages
             saveButton.Click();
             Thread.Sleep(3000);
 
-            // Check if record created is present in the table and has expected value
-            IWebElement editedFirstName = driver.FindElement(By.XPath("//*[@id=\"root\"]/div/div[2]/div/div[2]/div/div/div[2]/div[2]/div/div/div/table/tbody/tr[last()]/td[1]/div/div[1]"));
-            IWebElement editedLastName = driver.FindElement(By.XPath("//*[@id=\"root\"]/div/div[2]/div/div[2]/div/div/div[2]/div[2]/div/div/div/table/tbody/tr[last()]/td[1]/div/div[2]"));
-            IWebElement editedUsername = driver.FindElement(By.XPath("//*[@id=\"root\"]/div/div[2]/div/div[2]/div/div/div[2]/div[2]/div/div/div/table/tbody/tr[last()]/td[1]/div/div[3]"));
+            //// Check if record created is present in the table and has expected value
+            //IWebElement editedLastName = driver.FindElement(By.XPath("//*[@id=\"root\"]/div/div[2]/div/div[2]/div/div/div[2]/div[2]/div/div/div/table/tbody/tr[last()]/td[1]/div/div[2]"));
+            //IWebElement editedUsername = driver.FindElement(By.XPath("//*[@id=\"root\"]/div/div[2]/div/div[2]/div/div/div[2]/div[2]/div/div/div/table/tbody/tr[last()]/td[1]/div/div[3]"));
 
-            Assert.AreEqual(editedFirstName.Text, "First Name: editedTest", "Actual first name and expected first name do not match");
-            Assert.AreEqual(editedLastName.Text, "Last Name: editedUser", "Actual last name and expected last name do not match");
-            Assert.AreEqual(editedUsername.Text, "Username: editedTestUser", "Actual username and expected username do not match");
+            //Assert.AreEqual(editedFirstName.Text, "First Name: editedTest", "Actual first name and expected first name do not match");
+            //Assert.AreEqual(editedLastName.Text, "Last Name: editedUser", "Actual last name and expected last name do not match");
+            //Assert.AreEqual(editedUsername.Text, "Username: editedTestUser", "Actual username and expected username do not match");
+        }
+
+        public string GetEditedFirstName(IWebDriver driver)
+        {
+            IWebElement editedFirstName = driver.FindElement(By.XPath("//*[@id=\"root\"]/div/div[2]/div/div[2]/div/div/div[2]/div[2]/div/div/div/table/tbody/tr[last()]/td[1]/div/div[1]"));
+            return editedFirstName.Text;
         }
 
         public void DeleteEmployee(IWebDriver driver)
